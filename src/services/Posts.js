@@ -7,6 +7,9 @@ class Posts {
     getAll() {
         return axios.get('posts');
     }
+    get(id) {
+        return axios.get(`posts/${id}`);
+    }
 }
 
 const posts = new Posts();

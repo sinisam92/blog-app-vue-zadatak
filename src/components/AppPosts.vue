@@ -10,7 +10,7 @@
                 <tbody>
                     <tr v-for="post in posts" :key="post.id">
                         <td>{{ post.id }}</td>
-                        <td>{{ post.title }}</td>
+                        <td>{{ post.title }} <button type="button" class="btn btn-link" @click="navigateToPost(post.id)" >View Post</button></td>
                         <td>{{ post.text }}</td>                                        
                     </tr>
                 </tbody>
@@ -35,6 +35,11 @@ export default {
                 console.log(err.response);
                 
             })
+    },
+    methods: {
+        navigateToPost(id) {
+            this.$router.push(`/posts/${id}`);
+        }
     }
 }
 </script>
@@ -42,5 +47,6 @@ export default {
 <style scoped>
 table {
     border: 5px;
+    width: 100%;
 }
 </style>
