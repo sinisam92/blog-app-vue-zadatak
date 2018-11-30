@@ -3,7 +3,14 @@
     <form @submit.prevent="addPost">
       <div class="form-group">
         <label>Title</label>
-        <input type="text" class="form-control" placeholder="Title" v-model="newPost.title">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Title"
+          v-model="newPost.title"
+          required
+          minlength="2"
+        >
       </div>
       <div class="form-group">
         <label>Content</label>
@@ -13,6 +20,8 @@
           class="form-control"
           placeholder="Content"
           v-model="newPost.text"
+          required
+          maxlength="300"
         />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
