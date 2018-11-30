@@ -1,46 +1,52 @@
 <template>
-    <div class="container">
-        <form @submit.prevent="addPost" >
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" class="form-control" placeholder="Title" v-model="newPost.title">
-            </div>
-            <div class="form-group">
-                <label>Content</label>
-                <textarea type="textarea" rows="3" class="form-control" placeholder="Content" v-model="newPost.text"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+  <div class="container">
+    <form @submit.prevent="addPost">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Title" v-model="newPost.title">
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <textarea
+          type="textarea"
+          rows="3"
+          class="form-control"
+          placeholder="Content"
+          v-model="newPost.text"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-info" @click.stop.prevent="resetForm">Reset</button>
+    </form>
+  </div>
 </template>
 
 <script>
-
 import Posts from "../services/Posts";
 
-
 export default {
-    data() {
-        return {
-            newPost: {},
-        }
+  data() {
+    return {
+      newPost: {}
+    };
+  },
+  methods: {
+    addPost() {
+      Posts.add(this.newPost)
+        .then(response => {
+          this.newPost = {};
+          this.$router.push("/posts");
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
     },
-    methods: {
-        addPost() {
-            Posts.add(this.newPost)
-                .then(response => {
-                    this.newPost = {};
-                    this.$router.push('/posts');
-                }).catch(error => {
-                    console.log(error.response);
-                    
-                })
-        }
+    resetForm() {
+      this.newPost = {};
     }
-
-}
+  }
+};
 </script>
 
 <style>
-
 </style>
