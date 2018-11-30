@@ -10,6 +10,10 @@ class Posts {
     get(id) {
         return axios.get(`posts/${id}`);
     }
+    add(newPost) {
+        return axios.post('posts', newPost);
+    }
+
 }
 
 const posts = new Posts();
