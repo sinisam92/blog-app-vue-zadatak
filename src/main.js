@@ -30,7 +30,11 @@ const routes = [{
     component: AddPost,
     name: 'add-post'
   },
-
+  {
+    path: '/edit/:id',
+    component: AddPost,
+    name: 'edit-post'
+  }
 ];
 const router = new VueRouter({
   mode: 'history',

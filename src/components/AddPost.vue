@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form @submit.prevent="addPost">
+    <form @submit.prevent="onSubmit">
       <div class="form-group">
         <label>Title</label>
         <input
@@ -34,16 +34,43 @@
 import Posts from "../services/Posts";
 
 export default {
+  created() {
+    this.$route.params.id &&
+      Posts.get(this.$route.params.id)
+        .then(response => {
+          this.post = response.data;
+          this.newPost = response.data;
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+  },
   data() {
     return {
       newPost: {}
     };
   },
   methods: {
+    onSubmit() {
+      if (this.$route.params.id) {
+        this.editPost();
+      } else {
+        this.addPost();
+      }
+    },
     addPost() {
       Posts.add(this.newPost)
         .then(response => {
           this.newPost = {};
+          this.$router.push("/posts");
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    },
+    editPost() {
+      Posts.edit(this.post.id, this.newPost)
+        .then(response => {
           this.$router.push("/posts");
         })
         .catch(error => {
@@ -57,5 +84,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  margin-left: 4px;
+}
 </style>

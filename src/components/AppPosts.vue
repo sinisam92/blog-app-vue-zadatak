@@ -18,6 +18,9 @@
               >View Post</button>
             </td>
             <td>{{ post.text }}</td>
+            <router-link :to="{ name: 'edit-post', params: { id: post.id }}">
+              <button class="btn btn-info">Edit</button>
+            </router-link>
           </tr>
         </tbody>
       </table>

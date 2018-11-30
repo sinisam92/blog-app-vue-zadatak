@@ -13,6 +13,9 @@ class Posts {
     add(newPost) {
         return axios.post('posts', newPost);
     }
+    edit(id, post) {
+        return axios.put(`posts/${id}`, post)
+    }
 
 }
 
