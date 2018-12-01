@@ -8,13 +8,19 @@ class Posts {
         return axios.get('posts');
     }
     get(id) {
-        return axios.get(`posts/${id}`);
+        return axios.get(`posts/${id}?filter={"include":["comments"]}`);
     }
     add(newPost) {
         return axios.post('posts', newPost);
     }
     edit(id, post) {
         return axios.put(`posts/${id}`, post)
+    }
+    delete(id) {
+        return axios.delete(`posts/${id}`)
+    }
+    addComment(postId, comment) {
+        return axios.post(`posts/${postId}/comments`, comment)
     }
 
 }

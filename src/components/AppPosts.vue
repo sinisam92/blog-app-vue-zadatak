@@ -1,15 +1,13 @@
 <template>
   <div class="container">
     <div class="jumbotron">
-      <table border="1">
+      <table>
         <thead>
-          <th>Id</th>
           <th>Title</th>
           <th>Content</th>
         </thead>
         <tbody>
           <tr v-for="post in posts" :key="post.id">
-            <td>{{ post.id }}</td>
             <td>
               {{ post.title }}
               <button
@@ -21,6 +19,7 @@
             <router-link :to="{ name: 'edit-post', params: { id: post.id }}">
               <button class="btn btn-info">Edit</button>
             </router-link>
+            <button class="btn btn-danger" @click="deletePost(post.id)">Delete</button>
           </tr>
         </tbody>
       </table>
@@ -46,6 +45,15 @@ export default {
       });
   },
   methods: {
+    deletePost(id) {
+      Posts.delete(id)
+        .then(response => {
+          this.$router.push("/posts");
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    },
     navigateToPost(id) {
       this.$router.push(`/posts/${id}`);
     }
@@ -57,5 +65,9 @@ export default {
 table {
   border: 5px;
   width: 100%;
+}
+.btn {
+  width: 100%;
+  margin-bottom: 2px;
 }
 </style>

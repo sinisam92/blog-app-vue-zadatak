@@ -19,6 +19,15 @@
 
           <!-- Post Content -->
           <p class="lead">{{ post.text }}</p>
+          <hr>
+          <h3>Comments</h3>
+          <ul>
+            <li v-for="comment in comments" :key="comment.id">
+              <hr>
+              {{ comment.text }}
+            </li>
+          </ul>
+          <add-comment></add-comment>
         </div>
       </div>
     </div>
@@ -28,17 +37,23 @@
 
 <script>
 import Posts from "../services/Posts";
+import AddComment from "./AddComment.vue";
 
 export default {
+  components: {
+    AddComment
+  },
   data() {
     return {
-      post: []
+      post: [],
+      comments: []
     };
   },
   created() {
     Posts.get(this.$route.params.id)
       .then(response => {
         this.post = response.data;
+        this.comments = response.data.comments;
       })
       .catch(error => {
         console.log(error.response);
@@ -49,6 +64,9 @@ export default {
 
 <style scoped>
 .container {
+  text-align: left;
+}
+li {
   text-align: left;
 }
 </style>
