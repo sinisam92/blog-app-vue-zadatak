@@ -50,7 +50,7 @@ export default {
     deletePost(id, index) {
       Posts.delete(id)
         .then(response => {
-          this.posts.splice(index, 1);
+          this.posts = this.posts.filter(post => post.id !== id);
         })
         .catch(error => {
           console.log(error.response);

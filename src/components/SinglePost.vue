@@ -3,30 +3,24 @@
     <div class="comment">
       <div class="row">
         <div class="col-lg-8">
-          <!-- Title -->
           <h1 class="mt-4">{{ post.title }}</h1>
-          <!-- Author -->
-          <!-- <p class="lead">
-                by
-                <a href="#">Start Bootstrap</a>
-          </p>-->
-          <!-- <hr> -->
-          <!-- Date/Time -->
-          <p>{{ post.createdAt }}</p>
+
+          <p>{{ post.createdAt | formatDate}}</p>
 
           <hr>
 
-          <!-- Post Content -->
           <p class="lead">{{ post.text }}</p>
           <hr>
           <h3>Comments</h3>
           <ul>
             <li v-for="comment in comments" :key="comment.id">
               <hr>
+              {{ comment.createdAt | diffForHumans }}
+              <br>
               {{ comment.text }}
             </li>
           </ul>
-          <add-comment></add-comment>
+          <add-comment @addNewComment="addComment"/>
         </div>
       </div>
     </div>
@@ -37,8 +31,11 @@
 <script>
 import Posts from "../services/Posts";
 import AddComment from "./AddComment.vue";
+import { DateMixin, redirectMixin } from "../utils/mixins.js";
 
 export default {
+  mixins: [redirectMixin, DateMixin],
+
   components: {
     AddComment
   },
@@ -57,6 +54,18 @@ export default {
       .catch(error => {
         console.log(error.response);
       });
+  },
+  methods: {
+    addComment(newComment) {
+      Posts.addComment(this.post.id, newComment)
+        .then(response => {
+          this.comments.push(response.data);
+          newComment.text = "";
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    }
   }
 };
 </script>

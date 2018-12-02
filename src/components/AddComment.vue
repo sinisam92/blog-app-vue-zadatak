@@ -28,15 +28,7 @@ export default {
   },
   methods: {
     addComment() {
-      Posts.addComment(this.post.id, this.newComment)
-        .then(response => {
-          this.$router.push(`/posts/${this.post.id}`);
-          this.newComment = {};
-          console.log(this.post.id);
-        })
-        .catch(error => {
-          console.log(error.response);
-        });
+      this.$emit("addNewComment", this.newComment);
     }
   }
 };

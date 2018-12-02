@@ -32,8 +32,10 @@
 
 <script>
 import Posts from "../services/Posts";
+import { redirectMixin } from "../utils/mixins";
 
 export default {
+  mixins: [redirectMixin],
   created() {
     this.$route.params.id &&
       Posts.get(this.$route.params.id)
@@ -62,7 +64,7 @@ export default {
       Posts.add(this.newPost)
         .then(response => {
           this.newPost = {};
-          this.$router.push("/posts");
+          this.redirectTo("posts");
         })
         .catch(error => {
           console.log(error.response);
@@ -71,7 +73,7 @@ export default {
     editPost() {
       Posts.edit(this.post.id, this.newPost)
         .then(response => {
-          this.$router.push("/posts");
+          this.redirectTo("posts");
         })
         .catch(error => {
           console.log(error.response);
