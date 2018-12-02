@@ -5,7 +5,7 @@ class Posts {
         axios.defaults.baseURL = 'http://localhost:3000/api/'
     }
     getAll() {
-        return axios.get('posts');
+        return axios.get('posts?filter={"include":["comments"]}');
     }
     get(id) {
         return axios.get(`posts/${id}?filter={"include":["comments"]}`);

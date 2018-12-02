@@ -16,7 +16,6 @@ export default {
       Posts.get(this.$route.params.id)
         .then(response => {
           this.post = response.data;
-          console.log(this.post);
         })
         .catch(error => {
           console.log(error.response);
@@ -31,8 +30,8 @@ export default {
     addComment() {
       Posts.addComment(this.post.id, this.newComment)
         .then(response => {
+          this.$router.push(`/posts/${this.post.id}`);
           this.newComment = {};
-          this.$router.push({ path: `/posts/${this.post.id}` });
           console.log(this.post.id);
         })
         .catch(error => {

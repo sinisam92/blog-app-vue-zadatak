@@ -14,6 +14,7 @@
                 class="btn btn-link"
                 @click="navigateToPost(post.id)"
               >View Post</button>
+              Comms: {{ post.comments.length }}
             </td>
             <td>{{ post.text }}</td>
             <router-link :to="{ name: 'edit-post', params: { id: post.id }}">
@@ -29,6 +30,7 @@
 
 <script>
 import Posts from "../services/Posts";
+
 export default {
   data() {
     return {
@@ -45,10 +47,10 @@ export default {
       });
   },
   methods: {
-    deletePost(id) {
+    deletePost(id, index) {
       Posts.delete(id)
         .then(response => {
-          this.$router.push("/posts");
+          this.posts.splice(index, 1);
         })
         .catch(error => {
           console.log(error.response);

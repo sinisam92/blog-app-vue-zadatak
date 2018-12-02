@@ -1,11 +1,10 @@
 <template>
   <div class="container">
-    <div class="container">
+    <div class="comment">
       <div class="row">
         <div class="col-lg-8">
           <!-- Title -->
           <h1 class="mt-4">{{ post.title }}</h1>
-
           <!-- Author -->
           <!-- <p class="lead">
                 by
