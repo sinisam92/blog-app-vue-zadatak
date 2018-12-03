@@ -1,27 +1,25 @@
 <template>
   <div class="container">
-    <div class="comment">
-      <div class="row">
-        <div class="col-lg-8">
-          <h1 class="mt-4">{{ post.title }}</h1>
+    <div class="row">
+      <div class="col-lg-8">
+        <h1 class="mt-4">{{ post.title }}</h1>
 
-          <p>{{ post.createdAt | formatDate}}</p>
+        <p>{{ post.createdAt | formatDate}}</p>
 
-          <hr>
+        <hr>
 
-          <p class="lead">{{ post.text }}</p>
-          <hr>
-          <h3>Comments</h3>
-          <ul>
-            <li v-for="comment in comments" :key="comment.id">
-              <hr>
-              {{ comment.createdAt | diffForHumans }}
-              <br>
-              {{ comment.text }}
-            </li>
-          </ul>
-          <add-comment @addNewComment="addComment"/>
-        </div>
+        <p class="lead">{{ post.text }}</p>
+        <hr>
+        <h3>Comments</h3>
+        <ul>
+          <li v-for="comment in comments" :key="comment.id">
+            <hr>
+            {{ comment.createdAt | diffForHumans }}
+            <br>
+            {{ comment.text }}
+          </li>
+        </ul>
+        <add-comment @addNewComment="addComment"/>
       </div>
     </div>
   </div>
@@ -76,5 +74,8 @@ export default {
 }
 li {
   text-align: left;
+}
+.container {
+  color: white;
 }
 </style>

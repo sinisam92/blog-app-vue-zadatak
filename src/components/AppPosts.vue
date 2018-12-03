@@ -72,4 +72,7 @@ table {
   width: 100%;
   margin-bottom: 2px;
 }
+.jumbotron {
+  opacity: 0.8;
+}
 </style>

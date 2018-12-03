@@ -39,5 +39,9 @@ export default {
 textarea {
   width: 100%;
   border-radius: 10px;
+  opacity: 0.5;
+}
+.btn {
+  opacity: 0.5;
 }
 </style>
