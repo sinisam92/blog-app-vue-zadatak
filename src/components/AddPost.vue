@@ -37,7 +37,7 @@ import { redirectMixin } from "../utils/mixins";
 export default {
   mixins: [redirectMixin],
   created() {
-    this.$route.params.id &&
+    if (this.$route.params.id) {
       Posts.get(this.$route.params.id)
         .then(response => {
           this.post = response.data;
@@ -46,6 +46,7 @@ export default {
         .catch(error => {
           console.log(error.response);
         });
+    }
   },
   data() {
     return {

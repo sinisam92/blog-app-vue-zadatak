@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+import {
+  MdButton,
+  MdTabs,
+} from 'vue-material/dist/components';
+import 'vue-material/dist/vue-material.min.css'
 import AppPosts from "./components/AppPosts.vue";
 import SinglePost from "./components/SinglePost.vue";
 import AddPost from "./components/AddPost.vue";
@@ -8,7 +13,11 @@ import AddPost from "./components/AddPost.vue";
 
 
 
+
 Vue.config.productionTip = false
+Vue.use(MdTabs);
+Vue.use(MdButton);
+
 
 Vue.use(VueRouter);
 
